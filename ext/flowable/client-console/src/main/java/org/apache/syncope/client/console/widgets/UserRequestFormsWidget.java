@@ -94,7 +94,7 @@ public class UserRequestFormsWidget extends ExtAlertWidget<UserRequestForm> {
 
     @Override
     protected IModel<List<UserRequestForm>> getLatestAlerts() {
-        return new ListModel<UserRequestForm>() {
+        return new ListModel<>() {
 
             private static final long serialVersionUID = -2583290457773357445L;
 

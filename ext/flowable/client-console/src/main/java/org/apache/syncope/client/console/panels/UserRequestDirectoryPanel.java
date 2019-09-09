@@ -85,7 +85,7 @@ public class UserRequestDirectoryPanel
     public ActionsPanel<UserRequest> getActions(final IModel<UserRequest> model) {
         final ActionsPanel<UserRequest> panel = super.getActions(model);
 
-        panel.add(new ActionLink<UserRequest>() {
+        panel.add(new ActionLink<>() {
 
             private static final long serialVersionUID = -3722207913631435501L;
 
@@ -98,7 +98,7 @@ public class UserRequestDirectoryPanel
                     UserRequestDirectoryPanel.this.getTogglePanel().close(target);
                 } catch (SyncopeClientException e) {
                     SyncopeConsoleSession.get().error(StringUtils.isBlank(e.getMessage())
-                            ? e.getClass().getName() : e.getMessage());
+                        ? e.getClass().getName() : e.getMessage());
                     LOG.error("While canceling execution {}", model.getObject().getExecutionId(), e);
                 }
                 ((BasePage) pageRef.getPage()).getNotificationPanel().refresh(target);
@@ -148,7 +148,7 @@ public class UserRequestDirectoryPanel
 
         @Override
         public IModel<UserRequest> model(final UserRequest request) {
-            return new IModel<UserRequest>() {
+            return new IModel<>() {
 
                 private static final long serialVersionUID = -2566070996511906708L;
 

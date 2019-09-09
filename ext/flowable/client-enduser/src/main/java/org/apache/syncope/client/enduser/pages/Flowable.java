@@ -79,7 +79,7 @@ public class Flowable extends BaseExtPage {
         container.setOutputMarkupId(true);
 
         // list of accordions containing request form (if any) and delete button
-        urDataView = new DataView<UserRequest>("userRequests", new URDataProvider(rowsPerPage, "bpmnProcess")) {
+        urDataView = new DataView<>("userRequests", new URDataProvider(rowsPerPage, "bpmnProcess")) {
 
             private static final long serialVersionUID = -5002600396458362774L;
 
@@ -87,8 +87,8 @@ public class Flowable extends BaseExtPage {
             protected void populateItem(final Item<UserRequest> item) {
                 final UserRequest userRequest = item.getModelObject();
                 item.add(new Accordion("userRequestDetails", Collections.<ITab>singletonList(new AbstractTab(
-                        new StringResourceModel("user.requests.accordion", container,
-                                Model.of(userRequest))) {
+                    new StringResourceModel("user.requests.accordion", container,
+                        Model.of(userRequest))) {
 
                     private static final long serialVersionUID = 1037272333056449378L;
 

@@ -71,7 +71,7 @@ public class UserRequestFormDirectoryPanel
 
     private static final String PREF_USER_REQUEST_FORM_PAGINATOR_ROWS = "userrequestform.paginator.rows";
 
-    protected final BaseModal<UserRequestForm> manageFormModal = new BaseModal<UserRequestForm>("outer") {
+    protected final BaseModal<UserRequestForm> manageFormModal = new BaseModal<>("outer") {
 
         private static final long serialVersionUID = 389935548143327858L;
 
@@ -140,7 +140,7 @@ public class UserRequestFormDirectoryPanel
     public ActionsPanel<UserRequestForm> getActions(final IModel<UserRequestForm> model) {
         final ActionsPanel<UserRequestForm> panel = super.getActions(model);
 
-        panel.add(new ActionLink<UserRequestForm>() {
+        panel.add(new ActionLink<>() {
 
             private static final long serialVersionUID = -3722207913631435501L;
 
@@ -154,7 +154,7 @@ public class UserRequestFormDirectoryPanel
 
         }, ActionLink.ActionType.CLAIM, FlowableEntitlement.USER_REQUEST_FORM_CLAIM);
 
-        panel.add(new ActionLink<UserRequestForm>() {
+        panel.add(new ActionLink<>() {
 
             private static final long serialVersionUID = -4496313424398213416L;
 
@@ -170,12 +170,12 @@ public class UserRequestFormDirectoryPanel
             @Override
             protected boolean statusCondition(final UserRequestForm modelObject) {
                 return SyncopeConsoleSession.get().getSelfTO().getUsername().
-                        equals(model.getObject().getAssignee());
+                    equals(model.getObject().getAssignee());
             }
 
         }, ActionLink.ActionType.UNCLAIM, FlowableEntitlement.USER_REQUEST_FORM_UNCLAIM);
 
-        panel.add(new ActionLink<UserRequestForm>() {
+        panel.add(new ActionLink<>() {
 
             private static final long serialVersionUID = -3722207913631435501L;
 
@@ -184,7 +184,7 @@ public class UserRequestFormDirectoryPanel
                 manageFormModal.setFormModel(new CompoundPropertyModel<>(model.getObject()));
 
                 target.add(manageFormModal.setContent(new UserRequestFormModal(manageFormModal, pageRef, model.
-                        getObject()) {
+                    getObject()) {
 
                     private static final long serialVersionUID = 5546519445061007248L;
 
@@ -209,13 +209,13 @@ public class UserRequestFormDirectoryPanel
             @Override
             protected boolean statusCondition(final UserRequestForm modelObject) {
                 return SyncopeConsoleSession.get().getSelfTO().getUsername().
-                        equals(model.getObject().getAssignee());
+                    equals(model.getObject().getAssignee());
             }
 
         }, ActionLink.ActionType.MANAGE_APPROVAL, FlowableEntitlement.USER_REQUEST_FORM_SUBMIT);
 
         // SYNCOPE-1200 edit user while in approval state
-        panel.add(new ActionLink<UserRequestForm>() {
+        panel.add(new ActionLink<>() {
 
             private static final long serialVersionUID = -3722207913631435501L;
 
@@ -242,14 +242,14 @@ public class UserRequestFormDirectoryPanel
                 }
 
                 AjaxWizard.EditItemActionEvent<UserTO> editItemActionEvent =
-                        new AjaxWizard.EditItemActionEvent<>(newUserTO, target);
+                    new AjaxWizard.EditItemActionEvent<>(newUserTO, target);
                 editItemActionEvent.forceModalPanel(new FormUserWizardBuilder(
-                        model.getObject(),
-                        previousUserTO,
-                        newUserTO,
-                        new AnyTypeRestClient().read(AnyTypeKind.USER.name()).getClasses(),
-                        FormLayoutInfoUtils.fetch(List.of(AnyTypeKind.USER.name())).getLeft(),
-                        pageRef
+                    model.getObject(),
+                    previousUserTO,
+                    newUserTO,
+                    new AnyTypeRestClient().read(AnyTypeKind.USER.name()).getClasses(),
+                    FormLayoutInfoUtils.fetch(List.of(AnyTypeKind.USER.name())).getLeft(),
+                    pageRef
                 ).build(BaseModal.CONTENT_ID, AjaxWizard.Mode.EDIT));
 
                 send(UserRequestFormDirectoryPanel.this, Broadcast.EXACT, editItemActionEvent);
@@ -258,7 +258,7 @@ public class UserRequestFormDirectoryPanel
             @Override
             protected boolean statusCondition(final UserRequestForm modelObject) {
                 return SyncopeConsoleSession.get().getSelfTO().getUsername().
-                        equals(model.getObject().getAssignee());
+                    equals(model.getObject().getAssignee());
             }
 
         }, ActionLink.ActionType.EDIT_APPROVAL, FlowableEntitlement.USER_REQUEST_FORM_SUBMIT);
@@ -301,7 +301,7 @@ public class UserRequestFormDirectoryPanel
 
         @Override
         public IModel<UserRequestForm> model(final UserRequestForm form) {
-            return new IModel<UserRequestForm>() {
+            return new IModel<>() {
 
                 private static final long serialVersionUID = -2566070996511906708L;
 

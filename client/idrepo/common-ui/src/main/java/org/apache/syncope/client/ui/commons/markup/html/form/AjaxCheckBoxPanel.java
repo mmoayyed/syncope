@@ -61,7 +61,7 @@ public class AjaxCheckBoxPanel extends FieldPanel<Boolean> {
 
     @Override
     public FieldPanel<Boolean> setNewModel(final List<Serializable> list) {
-        setNewModel(new Model<Boolean>() {
+        setNewModel(new Model<>() {
 
             private static final long serialVersionUID = 527651414610325237L;
 
@@ -91,7 +91,7 @@ public class AjaxCheckBoxPanel extends FieldPanel<Boolean> {
     @SuppressWarnings("rawtypes")
     @Override
     public FieldPanel<Boolean> setNewModel(final ListItem item) {
-        IModel<Boolean> model = new Model<Boolean>() {
+        IModel<Boolean> model = new Model<>() {
 
             private static final long serialVersionUID = 6799404673615637845L;
 

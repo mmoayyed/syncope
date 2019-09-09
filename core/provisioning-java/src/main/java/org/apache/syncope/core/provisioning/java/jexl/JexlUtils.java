@@ -65,7 +65,7 @@ public final class JexlUtils {
 
     private static final Map<Class<?>, Set<Pair<PropertyDescriptor, Field>>> FIELD_CACHE =
             Collections.<Class<?>, Set<Pair<PropertyDescriptor, Field>>>synchronizedMap(
-                    new HashMap<Class<?>, Set<Pair<PropertyDescriptor, Field>>>());
+                new HashMap<>());
 
     private static JexlEngine JEXL_ENGINE;
 

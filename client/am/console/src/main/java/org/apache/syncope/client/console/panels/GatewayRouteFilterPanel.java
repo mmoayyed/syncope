@@ -66,7 +66,7 @@ public class GatewayRouteFilterPanel extends Panel {
             }
         }));
 
-        ListView<GatewayRouteFilter> filters = new ListView<GatewayRouteFilter>("filters", model) {
+        ListView<GatewayRouteFilter> filters = new ListView<>("filters", model) {
 
             private static final long serialVersionUID = 6741044372185745296L;
 
@@ -75,16 +75,16 @@ public class GatewayRouteFilterPanel extends Panel {
                 GatewayRouteFilter filter = item.getModelObject();
 
                 AjaxDropDownChoicePanel<FilterFactory> factory =
-                        new AjaxDropDownChoicePanel<>("factory", "factory", new PropertyModel<>(filter, "factory"));
+                    new AjaxDropDownChoicePanel<>("factory", "factory", new PropertyModel<>(filter, "factory"));
                 factory.setChoices(List.of(FilterFactory.values()));
                 item.add(factory.hideLabel());
 
                 AjaxTextFieldPanel args =
-                        new AjaxTextFieldPanel("args", "args", new PropertyModel<>(filter, "args"));
+                    new AjaxTextFieldPanel("args", "args", new PropertyModel<>(filter, "args"));
                 item.add(args.hideLabel());
 
                 ActionsPanel<Serializable> actions = new ActionsPanel<>("actions", null);
-                actions.add(new ActionLink<Serializable>() {
+                actions.add(new ActionLink<>() {
 
                     private static final long serialVersionUID = 2041211756396714619L;
 
@@ -98,7 +98,7 @@ public class GatewayRouteFilterPanel extends Panel {
                 }, ActionLink.ActionType.DELETE, StringUtils.EMPTY, true).hideLabel();
                 if (model.getObject().size() > 1) {
                     if (item.getIndex() > 0) {
-                        actions.add(new ActionLink<Serializable>() {
+                        actions.add(new ActionLink<>() {
 
                             private static final long serialVersionUID = 2041211756396714619L;
 
@@ -114,7 +114,7 @@ public class GatewayRouteFilterPanel extends Panel {
                         }, ActionLink.ActionType.UP, StringUtils.EMPTY).hideLabel();
                     }
                     if (item.getIndex() < model.getObject().size() - 1) {
-                        actions.add(new ActionLink<Serializable>() {
+                        actions.add(new ActionLink<>() {
 
                             private static final long serialVersionUID = 2041211756396714619L;
 

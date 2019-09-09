@@ -30,7 +30,7 @@ public abstract class AbstractFiqlSearchConditionBuilder extends FiqlSearchCondi
 
     private static final long serialVersionUID = 9043884238032703381L;
 
-    public static final Map<String, String> CONTEXTUAL_PROPERTIES = new HashMap<String, String>() {
+    public static final Map<String, String> CONTEXTUAL_PROPERTIES = new HashMap<>() {
 
         private static final long serialVersionUID = 3109256773218160485L;
 

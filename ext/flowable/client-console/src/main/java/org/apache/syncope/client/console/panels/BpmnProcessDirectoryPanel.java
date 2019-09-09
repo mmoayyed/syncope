@@ -83,13 +83,13 @@ public class BpmnProcessDirectoryPanel extends DirectoryPanel<
     protected BpmnProcessDirectoryPanel(final String id, final Builder builder) {
         super(id, builder);
 
-        this.addNewItemPanelBuilder(new AjaxWizardBuilder<BpmnProcess>(new BpmnProcess(), pageRef) {
+        this.addNewItemPanelBuilder(new AjaxWizardBuilder<>(new BpmnProcess(), pageRef) {
 
             private static final long serialVersionUID = 1633859795677053912L;
 
             @Override
             protected WizardModel buildModelSteps(
-                    final BpmnProcess modelObject, final WizardModel wizardModel) {
+                final BpmnProcess modelObject, final WizardModel wizardModel) {
 
                 return wizardModel;
             }
@@ -111,13 +111,13 @@ public class BpmnProcessDirectoryPanel extends DirectoryPanel<
 
             @Override
             protected Future<Pair<Serializable, Serializable>> execute(
-                    final Callable<Pair<Serializable, Serializable>> future) {
+                final Callable<Pair<Serializable, Serializable>> future) {
                 return SyncopeConsoleSession.get().execute(future);
             }
         }, false);
         NewBpmnProcess newBpmnProcess = new NewBpmnProcess("newBpmnProcess", container, pageRef);
         addInnerObject(newBpmnProcess);
-        AjaxLink<Void> newBpmnProcessLink = new AjaxLink<Void>("add") {
+        AjaxLink<Void> newBpmnProcessLink = new AjaxLink<>("add") {
 
             private static final long serialVersionUID = -7978723352517770644L;
 
@@ -174,7 +174,7 @@ public class BpmnProcessDirectoryPanel extends DirectoryPanel<
     public ActionsPanel<BpmnProcess> getActions(final IModel<BpmnProcess> model) {
         final ActionsPanel<BpmnProcess> panel = super.getActions(model);
 
-        panel.add(new ActionLink<BpmnProcess>() {
+        panel.add(new ActionLink<>() {
 
             private static final long serialVersionUID = -184018732772021627L;
 
@@ -183,7 +183,7 @@ public class BpmnProcessDirectoryPanel extends DirectoryPanel<
                 final IModel<String> wfDefinition = new Model<>();
                 try {
                     wfDefinition.setObject(IOUtils.toString(restClient.getDefinition(
-                            MediaType.APPLICATION_XML_TYPE, model.getObject().getKey())));
+                        MediaType.APPLICATION_XML_TYPE, model.getObject().getKey())));
                 } catch (IOException e) {
                     LOG.error("Could not get workflow definition", e);
                 }
@@ -198,7 +198,7 @@ public class BpmnProcessDirectoryPanel extends DirectoryPanel<
                         if (StringUtils.isNotBlank(wfDefinition.getObject())) {
                             try {
                                 restClient.setDefinition(MediaType.APPLICATION_XML_TYPE,
-                                        model.getObject().getKey(), wfDefinition.getObject());
+                                    model.getObject().getKey(), wfDefinition.getObject());
                                 SyncopeConsoleSession.get().info(getString(Constants.OPERATION_SUCCEEDED));
 
                                 target.add(container);
@@ -206,7 +206,7 @@ public class BpmnProcessDirectoryPanel extends DirectoryPanel<
                                 utility.close(target);
                             } catch (SyncopeClientException e) {
                                 SyncopeConsoleSession.get().error(StringUtils.isBlank(e.getMessage())
-                                        ? e.getClass().getName() : e.getMessage());
+                                    ? e.getClass().getName() : e.getMessage());
                             }
                             ((BasePage) pageRef.getPage()).getNotificationPanel().refresh(target);
                         }
@@ -217,7 +217,7 @@ public class BpmnProcessDirectoryPanel extends DirectoryPanel<
             }
         }, ActionLink.ActionType.EDIT, FlowableEntitlement.BPMN_PROCESS_SET);
 
-        panel.add(new ActionLink<BpmnProcess>() {
+        panel.add(new ActionLink<>() {
 
             private static final long serialVersionUID = 3109256773218160485L;
 
@@ -225,13 +225,13 @@ public class BpmnProcessDirectoryPanel extends DirectoryPanel<
             public void onClick(final AjaxRequestTarget target, final BpmnProcess ignore) {
                 modal.header(Model.of(model.getObject().getKey()));
                 modal.setContent(new ImageModalPanel<>(
-                        modal, restClient.getDiagram(model.getObject().getKey()), pageRef));
+                    modal, restClient.getDiagram(model.getObject().getKey()), pageRef));
                 modal.show(target);
                 target.add(modal);
             }
         }, ActionLink.ActionType.VIEW, FlowableEntitlement.BPMN_PROCESS_GET);
 
-        panel.add(new ActionLink<BpmnProcess>() {
+        panel.add(new ActionLink<>() {
 
             private static final long serialVersionUID = -184018732772021627L;
 
@@ -255,7 +255,7 @@ public class BpmnProcessDirectoryPanel extends DirectoryPanel<
             }
         }, ActionLink.ActionType.EXTERNAL_EDITOR, FlowableEntitlement.BPMN_PROCESS_SET);
 
-        panel.add(new ActionLink<BpmnProcess>() {
+        panel.add(new ActionLink<>() {
 
             private static final long serialVersionUID = -7978723352517770644L;
 
@@ -273,7 +273,7 @@ public class BpmnProcessDirectoryPanel extends DirectoryPanel<
                 } catch (SyncopeClientException e) {
                     LOG.error("While deleting BPMN definition {}", model.getObject().getName(), e);
                     SyncopeConsoleSession.get().error(
-                            StringUtils.isBlank(e.getMessage()) ? e.getClass().getName() : e.getMessage());
+                        StringUtils.isBlank(e.getMessage()) ? e.getClass().getName() : e.getMessage());
                 }
                 ((BasePage) pageRef.getPage()).getNotificationPanel().refresh(target);
             }

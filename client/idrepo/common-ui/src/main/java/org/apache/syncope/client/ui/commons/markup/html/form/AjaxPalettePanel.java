@@ -91,8 +91,8 @@ public class AjaxPalettePanel<T extends Serializable> extends AbstractFieldPanel
     private void initialize(final IModel<List<T>> model, final Builder<T> builder) {
         setOutputMarkupId(true);
 
-        this.palette = new NonI18nPalette<T>(
-                "paletteField", model, choicesModel, builder.renderer, 8, builder.allowOrder, builder.allowMoveAll) {
+        this.palette = new NonI18nPalette<>(
+            "paletteField", model, choicesModel, builder.renderer, 8, builder.allowOrder, builder.allowMoveAll) {
 
             private static final long serialVersionUID = -3074655279011678437L;
 
@@ -108,7 +108,7 @@ public class AjaxPalettePanel<T extends Serializable> extends AbstractFieldPanel
 
             @Override
             protected Recorder<T> newRecorderComponent() {
-                return new Recorder<T>("recorder", this) {
+                return new Recorder<>("recorder", this) {
 
                     private static final long serialVersionUID = -9169109967480083523L;
 

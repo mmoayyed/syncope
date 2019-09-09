@@ -107,15 +107,15 @@ public class SAML2IdPsDirectoryPanel extends DirectoryPanel<
         });
 
         // need to override to change the menu header
-        actionTogglePanel = new ActionLinksTogglePanel<SAML2IdPTO>("outer", pageRef) {
+        actionTogglePanel = new ActionLinksTogglePanel<>("outer", pageRef) {
 
             private static final long serialVersionUID = -7688359318035249200L;
 
             @Override
             public void toggleWithContent(
-                    final AjaxRequestTarget target,
-                    final ActionsPanel<SAML2IdPTO> actionsPanel,
-                    final SAML2IdPTO modelObject) {
+                final AjaxRequestTarget target,
+                final ActionsPanel<SAML2IdPTO> actionsPanel,
+                final SAML2IdPTO modelObject) {
 
                 super.toggleWithContent(target, actionsPanel, modelObject);
                 setHeader(target, StringUtils.abbreviate(modelObject.getName(), 25));
@@ -129,7 +129,7 @@ public class SAML2IdPsDirectoryPanel extends DirectoryPanel<
         setWindowClosedReloadCallback(metadataModal);
         metadataModal.size(Modal.Size.Large);
 
-        templateModal = new BaseModal<Serializable>("outer") {
+        templateModal = new BaseModal<>("outer") {
 
             private static final long serialVersionUID = 5787433530654262016L;
 
@@ -155,7 +155,7 @@ public class SAML2IdPsDirectoryPanel extends DirectoryPanel<
 
         final ImportMetadata importMetadata = new ImportMetadata("importMetadata", container, pageRef);
         addInnerObject(importMetadata);
-        AjaxLink<Void> importMetadataLink = new AjaxLink<Void>("add") {
+        AjaxLink<Void> importMetadataLink = new AjaxLink<>("add") {
 
             private static final long serialVersionUID = -7978723352517770644L;
 
@@ -205,7 +205,7 @@ public class SAML2IdPsDirectoryPanel extends DirectoryPanel<
     public ActionsPanel<SAML2IdPTO> getActions(final IModel<SAML2IdPTO> model) {
         final ActionsPanel<SAML2IdPTO> panel = super.getActions(model);
 
-        panel.add(new ActionLink<SAML2IdPTO>() {
+        panel.add(new ActionLink<>() {
 
             private static final long serialVersionUID = -7978723352517770645L;
 
@@ -214,15 +214,15 @@ public class SAML2IdPsDirectoryPanel extends DirectoryPanel<
                 SAML2IdPTO object = restClient.read(model.getObject().getKey());
                 metadataModal.header(Model.of(object.getName() + " - Metadata"));
                 metadataModal.setContent(new XMLEditorPanel(
-                        metadataModal,
-                        Model.of(new String(Base64.getMimeDecoder().decode(object.getMetadata()))),
-                        true,
-                        pageRef));
+                    metadataModal,
+                    Model.of(new String(Base64.getMimeDecoder().decode(object.getMetadata()))),
+                    true,
+                    pageRef));
                 metadataModal.show(true);
                 target.add(metadataModal);
             }
         }, ActionLink.ActionType.HTML, SAML2SPEntitlement.IDP_READ);
-        panel.add(new ActionLink<SAML2IdPTO>() {
+        panel.add(new ActionLink<>() {
 
             private static final long serialVersionUID = -3722207913631435501L;
 
@@ -230,10 +230,10 @@ public class SAML2IdPsDirectoryPanel extends DirectoryPanel<
             public void onClick(final AjaxRequestTarget target, final SAML2IdPTO ignore) {
                 SAML2IdPTO object = restClient.read(model.getObject().getKey());
                 send(SAML2IdPsDirectoryPanel.this, Broadcast.EXACT,
-                        new AjaxWizard.EditItemActionEvent<>(object, target));
+                    new AjaxWizard.EditItemActionEvent<>(object, target));
             }
         }, ActionLink.ActionType.EDIT, SAML2SPEntitlement.IDP_UPDATE);
-        panel.add(new ActionLink<SAML2IdPTO>() {
+        panel.add(new ActionLink<>() {
 
             private static final long serialVersionUID = -3722207913631435501L;
 
@@ -242,10 +242,10 @@ public class SAML2IdPsDirectoryPanel extends DirectoryPanel<
                 final SAML2IdPTO object = restClient.read(model.getObject().getKey());
 
                 UserTemplateWizardBuilder builder = new UserTemplateWizardBuilder(
-                        object.getUserTemplate(),
-                        new AnyTypeRestClient().read(AnyTypeKind.USER.name()).getClasses(),
-                        new UserFormLayoutInfo(),
-                        pageRef) {
+                    object.getUserTemplate(),
+                    new AnyTypeRestClient().read(AnyTypeKind.USER.name()).getClasses(),
+                    new UserFormLayoutInfo(),
+                    pageRef) {
 
                     private static final long serialVersionUID = -7978723352517770634L;
 
@@ -258,14 +258,14 @@ public class SAML2IdPsDirectoryPanel extends DirectoryPanel<
                     }
                 };
                 templateModal.header(Model.of(StringUtils.capitalize(
-                        new StringResourceModel("template.title", SAML2IdPsDirectoryPanel.this).getString())));
+                    new StringResourceModel("template.title", SAML2IdPsDirectoryPanel.this).getString())));
                 templateModal.setContent(builder.build(BaseModal.CONTENT_ID));
                 templateModal.show(true);
                 target.add(templateModal);
 
             }
         }, ActionLink.ActionType.TEMPLATE, SAML2SPEntitlement.IDP_UPDATE);
-        panel.add(new ActionLink<SAML2IdPTO>() {
+        panel.add(new ActionLink<>() {
 
             private static final long serialVersionUID = -5467832321897812767L;
 
@@ -278,7 +278,7 @@ public class SAML2IdPsDirectoryPanel extends DirectoryPanel<
                 } catch (SyncopeClientException e) {
                     LOG.error("While deleting object {}", model.getObject().getKey(), e);
                     SyncopeConsoleSession.get().error(StringUtils.isBlank(e.getMessage())
-                            ? e.getClass().getName() : e.getMessage());
+                        ? e.getClass().getName() : e.getMessage());
                 }
                 ((BasePage) pageRef.getPage()).getNotificationPanel().refresh(target);
             }

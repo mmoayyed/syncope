@@ -92,15 +92,15 @@ public class OIDCProvidersDirectoryPanel extends DirectoryPanel<
 
         modal.size(Modal.Size.Large);
 
-        actionTogglePanel = new ActionLinksTogglePanel<OIDCProviderTO>("outer", pageRef) {
+        actionTogglePanel = new ActionLinksTogglePanel<>("outer", pageRef) {
 
             private static final long serialVersionUID = -7688359318035249200L;
 
             @Override
             public void toggleWithContent(
-                    final AjaxRequestTarget target,
-                    final ActionsPanel<OIDCProviderTO> actionsPanel,
-                    final OIDCProviderTO modelObject) {
+                final AjaxRequestTarget target,
+                final ActionsPanel<OIDCProviderTO> actionsPanel,
+                final OIDCProviderTO modelObject) {
 
                 super.toggleWithContent(target, actionsPanel, modelObject);
                 setHeader(target, StringUtils.abbreviate(modelObject.getName(), 25));
@@ -110,7 +110,7 @@ public class OIDCProvidersDirectoryPanel extends DirectoryPanel<
         };
         addOuterObject(actionTogglePanel);
 
-        templateModal = new BaseModal<Serializable>("outer") {
+        templateModal = new BaseModal<>("outer") {
 
             private static final long serialVersionUID = 5787433530654262016L;
 
@@ -151,10 +151,10 @@ public class OIDCProvidersDirectoryPanel extends DirectoryPanel<
     @Override
     protected List<IColumn<OIDCProviderTO, String>> getColumns() {
         List<IColumn<OIDCProviderTO, String>> columns = new ArrayList<>();
-        columns.add(new KeyPropertyColumn<OIDCProviderTO>(new ResourceModel("key"), "key", "key"));
-        columns.add(new PropertyColumn<OIDCProviderTO, String>(new ResourceModel("name"), "name", "name"));
-        columns.add(new PropertyColumn<OIDCProviderTO, String>(new ResourceModel("issuer"), "issuer", "issuer"));
-        columns.add(new PropertyColumn<OIDCProviderTO, String>(new ResourceModel("clientID"), "clientID", "clientID"));
+        columns.add(new KeyPropertyColumn<>(new ResourceModel("key"), "key", "key"));
+        columns.add(new PropertyColumn<>(new ResourceModel("name"), "name", "name"));
+        columns.add(new PropertyColumn<>(new ResourceModel("issuer"), "issuer", "issuer"));
+        columns.add(new PropertyColumn<>(new ResourceModel("clientID"), "clientID", "clientID"));
         return columns;
 
     }
@@ -169,7 +169,7 @@ public class OIDCProvidersDirectoryPanel extends DirectoryPanel<
     public ActionsPanel<OIDCProviderTO> getActions(final IModel<OIDCProviderTO> model) {
         final ActionsPanel<OIDCProviderTO> panel = super.getActions(model);
 
-        panel.add(new ActionLink<OIDCProviderTO>() {
+        panel.add(new ActionLink<>() {
 
             private static final long serialVersionUID = -3722207913631435501L;
 
@@ -177,12 +177,12 @@ public class OIDCProvidersDirectoryPanel extends DirectoryPanel<
             public void onClick(final AjaxRequestTarget target, final OIDCProviderTO ignore) {
                 OIDCProviderTO object = restClient.read(model.getObject().getKey());
                 send(OIDCProvidersDirectoryPanel.this, Broadcast.EXACT,
-                        new AjaxWizard.EditItemActionEvent<>(object, target));
+                    new AjaxWizard.EditItemActionEvent<>(object, target));
                 modal.header(Model.of(StringUtils.capitalize(("Edit " + object.getName()))));
             }
         }, ActionLink.ActionType.EDIT, OIDCClientEntitlement.OP_UPDATE);
 
-        panel.add(new ActionLink<OIDCProviderTO>() {
+        panel.add(new ActionLink<>() {
 
             private static final long serialVersionUID = 8557679125857348178L;
 
@@ -191,10 +191,10 @@ public class OIDCProvidersDirectoryPanel extends DirectoryPanel<
                 final OIDCProviderTO object = restClient.read(model.getObject().getKey());
 
                 UserTemplateWizardBuilder builder = new UserTemplateWizardBuilder(
-                        object.getUserTemplate(),
-                        new AnyTypeRestClient().read(AnyTypeKind.USER.name()).getClasses(),
-                        new UserFormLayoutInfo(),
-                        pageRef) {
+                    object.getUserTemplate(),
+                    new AnyTypeRestClient().read(AnyTypeKind.USER.name()).getClasses(),
+                    new UserFormLayoutInfo(),
+                    pageRef) {
 
                     private static final long serialVersionUID = -7978723352517770634L;
 
@@ -207,7 +207,7 @@ public class OIDCProvidersDirectoryPanel extends DirectoryPanel<
                     }
                 };
                 templateModal.header(Model.of(StringUtils.capitalize(
-                        new StringResourceModel("template.title", OIDCProvidersDirectoryPanel.this).getString())));
+                    new StringResourceModel("template.title", OIDCProvidersDirectoryPanel.this).getString())));
                 templateModal.setContent(builder.build(BaseModal.CONTENT_ID));
                 templateModal.show(true);
                 target.add(templateModal);
@@ -215,7 +215,7 @@ public class OIDCProvidersDirectoryPanel extends DirectoryPanel<
             }
         }, ActionLink.ActionType.TEMPLATE, OIDCClientEntitlement.OP_UPDATE);
 
-        panel.add(new ActionLink<OIDCProviderTO>() {
+        panel.add(new ActionLink<>() {
 
             private static final long serialVersionUID = -5467832321897812767L;
 
@@ -228,7 +228,7 @@ public class OIDCProvidersDirectoryPanel extends DirectoryPanel<
                 } catch (SyncopeClientException e) {
                     LOG.error("While deleting object {}", model.getObject().getKey(), e);
                     SyncopeConsoleSession.get().error(StringUtils.isBlank(e.getMessage())
-                            ? e.getClass().getName() : e.getMessage());
+                        ? e.getClass().getName() : e.getMessage());
                 }
                 ((BasePage) pageRef.getPage()).getNotificationPanel().refresh(target);
             }

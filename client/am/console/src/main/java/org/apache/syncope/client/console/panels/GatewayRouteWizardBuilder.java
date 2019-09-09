@@ -81,7 +81,7 @@ public class GatewayRouteWizardBuilder extends BaseAjaxWizardBuilder<GatewayRout
                     setRequired(true));
 
             AjaxTextFieldPanel target = new AjaxTextFieldPanel(
-                    "target", "target", new IModel<String>() {
+                    "target", "target", new IModel<>() {
 
                 private static final long serialVersionUID = 1015030402166681242L;
 

@@ -91,7 +91,7 @@ public abstract class AjaxWizardBuilder<T extends Serializable> extends Abstract
         // get the specified item if available
         final T modelObject = newModelObject();
 
-        return new AjaxWizard<T>(id, modelObject, buildModelSteps(modelObject, new WizardModel()), mode, this.pageRef) {
+        return new AjaxWizard<>(id, modelObject, buildModelSteps(modelObject, new WizardModel()), mode, this.pageRef) {
 
             private static final long serialVersionUID = 7770507663760640735L;
 
@@ -137,7 +137,7 @@ public abstract class AjaxWizardBuilder<T extends Serializable> extends Abstract
 
             @Override
             protected Future<Pair<Serializable, Serializable>> execute(
-                    final Callable<Pair<Serializable, Serializable>> future) {
+                final Callable<Pair<Serializable, Serializable>> future) {
                 return AjaxWizardBuilder.this.execute(future);
             }
         }.setEventSink(eventSink).addOuterObject(outerObjects);

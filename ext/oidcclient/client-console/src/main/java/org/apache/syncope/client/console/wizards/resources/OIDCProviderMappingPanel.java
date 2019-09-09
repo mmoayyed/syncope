@@ -24,7 +24,6 @@ import java.util.List;
 import org.apache.syncope.client.console.init.ClassPathScanImplementationLookup;
 import org.apache.syncope.client.ui.commons.markup.html.form.AjaxTextFieldPanel;
 import org.apache.syncope.common.lib.to.AnyTypeClassTO;
-import org.apache.syncope.common.lib.to.ItemTO;
 import org.apache.syncope.common.lib.to.OIDCProviderTO;
 import org.apache.syncope.common.lib.types.AnyTypeKind;
 import org.apache.syncope.common.lib.types.MappingPurpose;
@@ -45,7 +44,7 @@ public class OIDCProviderMappingPanel extends AbstractMappingPanel {
         super(id,
                 mapItemTransformers,
                 jexlTransformers,
-                new ListModel<ItemTO>(opTO.getItems()),
+            new ListModel<>(opTO.getItems()),
                 true,
                 true,
                 MappingPurpose.NONE);

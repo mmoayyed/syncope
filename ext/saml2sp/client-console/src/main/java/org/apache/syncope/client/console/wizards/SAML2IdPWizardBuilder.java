@@ -68,25 +68,25 @@ public class SAML2IdPWizardBuilder extends AjaxWizardBuilder<SAML2IdPTO> {
 
     private final SAML2IdPsDirectoryPanel directoryPanel;
 
-    private final IModel<List<String>> idpActions = new LoadableDetachableModel<List<String>>() {
+    private final IModel<List<String>> idpActions = new LoadableDetachableModel<>() {
 
         private static final long serialVersionUID = 5275935387613157437L;
 
         @Override
         protected List<String> load() {
             return implRestClient.list(SAML2SPImplementationType.IDP_ACTIONS).stream().
-                    map(EntityTO::getKey).sorted().collect(Collectors.toList());
+                map(EntityTO::getKey).sorted().collect(Collectors.toList());
         }
     };
 
-    private final IModel<List<String>> requestedAuthnContextProviders = new LoadableDetachableModel<List<String>>() {
+    private final IModel<List<String>> requestedAuthnContextProviders = new LoadableDetachableModel<>() {
 
         private static final long serialVersionUID = 4659376149825914247L;
 
         @Override
         protected List<String> load() {
             return implRestClient.list(SAML2SPImplementationType.REQUESTED_AUTHN_CONTEXT_PROVIDER).stream().
-                    map(EntityTO::getKey).sorted().collect(Collectors.toList());
+                map(EntityTO::getKey).sorted().collect(Collectors.toList());
         }
     };
 
@@ -192,7 +192,7 @@ public class SAML2IdPWizardBuilder extends AjaxWizardBuilder<SAML2IdPTO> {
             actions.setOutputMarkupId(true);
             fields.add(actions);
 
-            add(new ListView<Component>("fields", fields) {
+            add(new ListView<>("fields", fields) {
 
                 private static final long serialVersionUID = -9180479401817023838L;
 

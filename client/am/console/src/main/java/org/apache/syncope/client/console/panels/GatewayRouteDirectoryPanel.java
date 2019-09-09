@@ -116,19 +116,19 @@ public class GatewayRouteDirectoryPanel
     protected ActionsPanel<GatewayRouteTO> getActions(final IModel<GatewayRouteTO> model) {
         ActionsPanel<GatewayRouteTO> panel = super.getActions(model);
 
-        panel.add(new ActionLink<GatewayRouteTO>() {
+        panel.add(new ActionLink<>() {
 
             private static final long serialVersionUID = -4608353559809323466L;
 
             @Override
             public void onClick(final AjaxRequestTarget target, final GatewayRouteTO ignore) {
                 send(GatewayRouteDirectoryPanel.this, Broadcast.EXACT,
-                        new AjaxWizard.EditItemActionEvent<>(
-                                restClient.read(model.getObject().getKey()), target));
+                    new AjaxWizard.EditItemActionEvent<>(
+                        restClient.read(model.getObject().getKey()), target));
             }
         }, ActionLink.ActionType.EDIT, AMEntitlement.GATEWAY_ROUTE_UPDATE);
 
-        panel.add(new ActionLink<GatewayRouteTO>() {
+        panel.add(new ActionLink<>() {
 
             private static final long serialVersionUID = -4608353559809323466L;
 
@@ -137,11 +137,11 @@ public class GatewayRouteDirectoryPanel
                 GatewayRouteTO clone = SerializationUtils.clone(model.getObject());
                 clone.setKey(null);
                 send(GatewayRouteDirectoryPanel.this, Broadcast.EXACT,
-                        new AjaxWizard.EditItemActionEvent<>(clone, target));
+                    new AjaxWizard.EditItemActionEvent<>(clone, target));
             }
         }, ActionLink.ActionType.CLONE, AMEntitlement.GATEWAY_ROUTE_CREATE);
 
-        panel.add(new ActionLink<GatewayRouteTO>() {
+        panel.add(new ActionLink<>() {
 
             private static final long serialVersionUID = -4608353559809323466L;
 
@@ -155,7 +155,7 @@ public class GatewayRouteDirectoryPanel
                 } catch (SyncopeClientException e) {
                     LOG.error("While deleting {}", route.getKey(), e);
                     SyncopeConsoleSession.get().error(StringUtils.isBlank(e.getMessage())
-                            ? e.getClass().getName() : e.getMessage());
+                        ? e.getClass().getName() : e.getMessage());
                 }
                 ((BasePage) pageRef.getPage()).getNotificationPanel().refresh(target);
             }

@@ -34,7 +34,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private static final Map<UUID, User> USERS = new HashMap<UUID, User>();
+    private static final Map<UUID, User> USERS = new HashMap<>();
 
     @Context
     private UriInfo uriInfo;

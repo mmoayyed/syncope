@@ -55,8 +55,8 @@ public class JSONTest {
         mapper.writeValue(writer, original);
 
         ProvisioningResult<GroupTO> actual = mapper.readValue(writer.toString(),
-                new TypeReference<ProvisioningResult<GroupTO>>() {
-        });
+            new TypeReference<>() {
+            });
         assertEquals(original, actual);
     }
 }
