@@ -12,7 +12,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+services:
+  - docker
 sudo: false
 language: java
 jdk:
@@ -30,9 +31,9 @@ env:
   global:
   - MAVEN_OPTS="-Xmx4096M -Xss128M -XX:+CMSClassUnloadingEnabled -XX:+TieredCompilation -XX:TieredStopAtLevel=1 -noverify"
 install: true
-notifications:
-  email:
-    - dev@syncope.apache.org
+# notifications:
+#   email:
+#     - dev@syncope.apache.org
 stages:
   - initialize
   - build
@@ -75,6 +76,21 @@ jobs:
     - stage: fit
       script: travis_wait 55 mvn -f fit/core-reference/pom.xml verify -P full-it,all,skipLegalFiles,skipSass -T 4 -Dinvoker.streamLogs=true -Denforcer.skip=true -Dmodernizer.skip=true -Djacoco.skip=true -Drat.skip=true
       name: "Full Integration Tests via JSON Content-Type"
+    - stage: fit
+      script: travis_wait 55 mvn mvn -P postgres-it,skipLegalFiles,skipSass -T 4 -Dinvoker.streamLogs=true -Denforcer.skip=true -Dmodernizer.skip=true -Djacoco.skip=true -Drat.skip=true
+      name: "PostgreSQL Database Integration Tests"
+    - stage: fit
+      script: travis_wait 55 mvn mvn -P mysql-it,skipLegalFiles,skipSass -T 4 -Dinvoker.streamLogs=true -Denforcer.skip=true -Dmodernizer.skip=true -Djacoco.skip=true -Drat.skip=true
+      name: "MySQL Database Integration Tests"
+    - stage: fit
+      script: travis_wait 55 mvn mvn -P mariadb-it,skipLegalFiles,skipSass -T 4 -Dinvoker.streamLogs=true -Denforcer.skip=true -Dmodernizer.skip=true -Djacoco.skip=true -Drat.skip=true
+      name: "MariaDb Database Integration Tests"
+    - stage: fit
+      script: travis_wait 55 mvn mvn -P sqlserver-it,skipLegalFiles,skipSass -T 4 -Dinvoker.streamLogs=true -Denforcer.skip=true -Dmodernizer.skip=true -Djacoco.skip=true -Drat.skip=true
+      name: "SQL Server Database Integration Tests"
+    - stage: fit
+      script: travis_wait 55 mvn mvn -P oracle-it,skipLegalFiles,skipSass -T 4 -Dinvoker.streamLogs=true -Denforcer.skip=true -Dmodernizer.skip=true -Djacoco.skip=true -Drat.skip=true
+      name: "Oracle Database Integration Tests"
     # - stage: fit
     #   script: travis_wait 55 mvn -f fit/core-reference/pom.xml verify -P full-it,all,skipLegalFiles,skipSass -T 4 -DjaxrsContentType=application/xml -Dinvoker.streamLogs=true -Denforcer.skip=true -Dmodernizer.skip=true -Djacoco.skip=true -Drat.skip=true
     #   name: "Full Integration Tests via XML Content-Type"
