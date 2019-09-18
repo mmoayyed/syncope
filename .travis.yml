@@ -43,10 +43,10 @@ stages:
 jobs:
   include:
     - stage: initialize
-      script: mvn --quiet --show-version -T 4 enforcer:enforce
+      script: travis_wait 30 mvn --quiet --show-version -T 4 enforcer:enforce
       name: "Verify Platform"
     - stage: initialize
-      script: mvn -T 4 clean dependency:go-offline dependency:resolve-plugins --quiet -Denforcer.skip=true
+      script: travis_wait 30 mvn -T 4 clean dependency:go-offline dependency:resolve-plugins --quiet -Denforcer.skip=true
       name: "Warm Up Dependencies"
       #######################################################
     - stage: build
@@ -77,19 +77,19 @@ jobs:
       script: travis_wait 55 mvn -f fit/core-reference/pom.xml verify -P full-it,all,skipLegalFiles,skipSass -T 4 -Dinvoker.streamLogs=true -Denforcer.skip=true -Dmodernizer.skip=true -Djacoco.skip=true -Drat.skip=true
       name: "Full Integration Tests via JSON Content-Type"
     - stage: fit
-      script: travis_wait 55 mvn mvn -P postgres-it,skipLegalFiles,skipSass -T 4 -Dinvoker.streamLogs=true -Denforcer.skip=true -Dmodernizer.skip=true -Djacoco.skip=true -Drat.skip=true
+      script: travis_wait 55 mvn verify -P postgres-it,skipLegalFiles,skipSass -T 4 -Dinvoker.streamLogs=true -Denforcer.skip=true -Dmodernizer.skip=true -Djacoco.skip=true -Drat.skip=true
       name: "PostgreSQL Database Integration Tests"
     - stage: fit
-      script: travis_wait 55 mvn mvn -P mysql-it,skipLegalFiles,skipSass -T 4 -Dinvoker.streamLogs=true -Denforcer.skip=true -Dmodernizer.skip=true -Djacoco.skip=true -Drat.skip=true
+      script: travis_wait 55 mvn verify -P mysql-it,skipLegalFiles,skipSass -T 4 -Dinvoker.streamLogs=true -Denforcer.skip=true -Dmodernizer.skip=true -Djacoco.skip=true -Drat.skip=true
       name: "MySQL Database Integration Tests"
     - stage: fit
-      script: travis_wait 55 mvn mvn -P mariadb-it,skipLegalFiles,skipSass -T 4 -Dinvoker.streamLogs=true -Denforcer.skip=true -Dmodernizer.skip=true -Djacoco.skip=true -Drat.skip=true
+      script: travis_wait 55 mvn verify -P mariadb-it,skipLegalFiles,skipSass -T 4 -Dinvoker.streamLogs=true -Denforcer.skip=true -Dmodernizer.skip=true -Djacoco.skip=true -Drat.skip=true
       name: "MariaDb Database Integration Tests"
     - stage: fit
-      script: travis_wait 55 mvn mvn -P sqlserver-it,skipLegalFiles,skipSass -T 4 -Dinvoker.streamLogs=true -Denforcer.skip=true -Dmodernizer.skip=true -Djacoco.skip=true -Drat.skip=true
+      script: travis_wait 55 mvn verify -P sqlserver-it,skipLegalFiles,skipSass -T 4 -Dinvoker.streamLogs=true -Denforcer.skip=true -Dmodernizer.skip=true -Djacoco.skip=true -Drat.skip=true
       name: "SQL Server Database Integration Tests"
     - stage: fit
-      script: travis_wait 55 mvn mvn -P oracle-it,skipLegalFiles,skipSass -T 4 -Dinvoker.streamLogs=true -Denforcer.skip=true -Dmodernizer.skip=true -Djacoco.skip=true -Drat.skip=true
+      script: travis_wait 55 mvn verify -P oracle-it,skipLegalFiles,skipSass -T 4 -Dinvoker.streamLogs=true -Denforcer.skip=true -Dmodernizer.skip=true -Djacoco.skip=true -Drat.skip=true
       name: "Oracle Database Integration Tests"
     # - stage: fit
     #   script: travis_wait 55 mvn -f fit/core-reference/pom.xml verify -P full-it,all,skipLegalFiles,skipSass -T 4 -DjaxrsContentType=application/xml -Dinvoker.streamLogs=true -Denforcer.skip=true -Dmodernizer.skip=true -Djacoco.skip=true -Drat.skip=true
