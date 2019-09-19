@@ -70,12 +70,12 @@ public class ReportITCase extends AbstractITCase {
         assertNotNull(exec);
 
         int i = 0;
-        int maxit = 50;
+        int maxit = 100;
 
         // wait for completion (executions incremented)
         do {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
             }
 
