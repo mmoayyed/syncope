@@ -68,7 +68,8 @@ public class ReportITCase extends AbstractITCase {
         int preExecSize = reportTO.getExecutions().size();
         ExecTO exec = reportService.execute(new ExecuteQuery.Builder().key(reportKey).build());
         assertNotNull(exec);
-
+        assertTrue(preExecSize > 0);
+        
         int i = 0;
         int maxit = 100;
 
