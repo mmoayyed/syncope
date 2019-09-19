@@ -86,7 +86,7 @@ public class ReportITCase extends AbstractITCase {
 
             i++;
         } while (preExecSize == reportTO.getExecutions().size() && i < maxit);
-        if (i == maxit) {
+        if (i == maxit && preExecSize != reportTO.getExecutions().size()) {
             fail("Timeout when executing report " + reportKey);
         }
         exec = reportTO.getExecutions().get(reportTO.getExecutions().size() - 1);

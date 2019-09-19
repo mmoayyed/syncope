@@ -1212,14 +1212,14 @@ under the License.
       <id>oracle-it</id>
       
       <properties>
-        <jdbcdriver.groupId>com.oracle.jdbc</jdbcdriver.groupId>
+        <jdbcdriver.groupId>com.oracle.ojdbc</jdbcdriver.groupId>
         <jdbcdriver.artifactId>ojdbc8</jdbcdriver.artifactId>
       </properties>
 
       <dependencies>
         <dependency>
-          <groupId>com.oracle.ojdbc</groupId>
-          <artifactId>ojdbc8</artifactId>
+          <groupId>${jdbcdriver.groupId}</groupId>
+          <artifactId>${jdbcdriver.artifactId}</artifactId>
           <version>19.3.0.0</version>
           <scope>test</scope>
         </dependency>
@@ -1249,7 +1249,7 @@ under the License.
                     <wait>
                       <log>Disconnected from Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production</log>
                       <time>30000</time>
-                    </wait>                
+                    </wait>
                   </run>
                 </image>
               </images>
