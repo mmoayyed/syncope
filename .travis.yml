@@ -33,7 +33,6 @@ env:
 before_install:
   - sudo service mysql stop
   - sudo service postgresql stop
-  - sudo service mariadb stop
 install: true
 # notifications:
 #   email:
